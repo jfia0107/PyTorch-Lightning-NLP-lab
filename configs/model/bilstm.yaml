@@ -1,0 +1,16 @@
+# BiLSTM model settings
+
+_target_: src.models.composer.ComposedNLPModel
+name: bilstm
+backbone:
+  _target_: src.models.embeddings.create_embedding_backbone
+  vocab_path: ${hydra:runtime.cwd}/data/${dataset_name}_word2idx.json
+  pretrained_file_path: null
+  embedding_dim: 300
+head:
+  _target_: src.models.BiLSTM.BiLSTM
+  input_size: 300
+  hidden_size: 128
+  num_layers: 2
+  dropout: 0.3
+  output_dim: 1

@@ -1,0 +1,19 @@
+# Encoder data lane specific settings
+
+_target_: src.data.datamodule.UnifiedDataModule
+source_type: ${source}
+data_path: ${hub_name}
+data_format: null
+text_column: ${text_column}
+label_column: ${label_column}
+pre_split: false
+lane: encoder
+# does the dataset contain binarized labels?
+binary_labels: false
+output_name: ${dataset_name}
+max_len: 256
+batch_size: 128
+num_workers: 32
+prefetch_factor: 4
+test_size: 0.15
+validation_size: 0.15

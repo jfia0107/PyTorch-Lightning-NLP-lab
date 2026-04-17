@@ -1,0 +1,5 @@
+# @package hydra.sweeper.params
+model.head.dropout: choice(0.2, 0.3, 0.4, 0.5)
+model.head.num_filters: choice(64, 128, 256)
+model.head.filter_sizes: choice([2,3,4], [3,4,5], [2,3,4,5])
+optimizer.head_lr: interval(1e-4, 1e-2)

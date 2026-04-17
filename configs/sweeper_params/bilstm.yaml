@@ -1,0 +1,5 @@
+# @package hydra.sweeper.params
+model.head.dropout: choice(0.2, 0.3, 0.4, 0.5)
+model.head.num_layers: choice(1, 2)
+model.head.hidden_size: choice(64, 128, 256)
+optimizer.head_lr: interval(1e-4, 1e-2)

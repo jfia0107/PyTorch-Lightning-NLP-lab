@@ -1,0 +1,14 @@
+# binary task settings
+
+name: binary
+task_class:
+  _target_: src.tasks.standard_task.StandardTask
+output_dim: 1
+metric_type: classification
+# which metric determins early stopping/checkpointing
+monitor_metric: val_auc
+monitor_mode: max
+# loss function
+loss_fn:
+  _target_: torch.nn.BCEWithLogitsLoss
+  reduction: mean

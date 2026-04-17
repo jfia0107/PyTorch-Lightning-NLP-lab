@@ -1,0 +1,45 @@
+# MAIN HYDRA CONFIG FILE
+
+project_name: Project
+
+
+dataset_name: civil_comments
+source: hub
+hub_name: google/civil_comments
+
+
+# name of text column
+text_column: text
+# name of label column
+label_column: threat
+
+
+run_name: ${dataset_name}_${model.name}
+seed: 42
+
+# experiment settings
+
+defaults:
+  - _self_
+  - task: binary
+  - model: cnn
+  - data: CDL
+  - trainer: default
+  - optimizer: adamw
+  - scheduler: none
+  - sampler: stratified
+  - logger: mlflow
+  # whenever a model is added it also needs its sweeper_params file, this can be turned off by commenting out the Optuna lines
+  - /hydra/sweeper/optuna_config@hydra.sweeper
+  - sweeper_params@hydra.sweeper.params: ${model}
+  - override /hydra/sweeper: optuna
+
+
+# additional pipeline logic
+
+freeze_backbone: false
+unfreeze_top_n: 4
+compile: true
+gradient_checkpointing: true
+warmup_ratio: 0.1
+ckpt_path: null

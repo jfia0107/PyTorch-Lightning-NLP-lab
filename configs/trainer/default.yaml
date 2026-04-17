@@ -1,0 +1,38 @@
+_target_: lightning.pytorch.Trainer
+max_epochs: 5
+# gpu/cpu
+accelerator: gpu
+
+# optional parallel strategy:
+#strategy: DDP
+devices: 1
+precision: 32
+#alternative precisions if supported by HW
+#bf16-mixed
+#16-mixed
+
+# Lightning Trainer specific settings, refer to Lightning Docs
+sync_batchnorm: true
+log_every_n_steps: 10
+val_check_interval: 1.0
+check_val_every_n_epoch: 1
+gradient_clip_val: 1.0
+gradient_clip_algorithm: norm
+limit_train_batches: 1.0
+limit_val_batches: 1.0
+use_distributed_sampler: false
+num_sanity_val_steps: 0
+# Lightning Callbacks
+callbacks:
+  - _target_: lightning.pytorch.callbacks.ModelCheckpoint
+    monitor: ${task.monitor_metric}
+    mode: ${task.monitor_mode}
+    save_top_k: 1
+    filename: ${dataset_name}_${model.name}_{epoch}-{${task.monitor_metric}:.3f}
+    save_on_train_epoch_end: false
+
+  - _target_: lightning.pytorch.callbacks.EarlyStopping
+    monitor: ${task.monitor_metric}
+    mode: ${task.monitor_mode}
+    patience: 5
+    check_on_train_epoch_end: false

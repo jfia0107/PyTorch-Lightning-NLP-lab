@@ -1,0 +1,4 @@
+# stratified sampler, this is also where the rattio can be set
+
+name: stratified
+minority_ratio: 0.05

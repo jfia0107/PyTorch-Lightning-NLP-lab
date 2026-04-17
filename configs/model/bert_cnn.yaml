@@ -1,0 +1,16 @@
+# BERTCNN model settings
+
+_target_: src.models.composer.ComposedNLPModel
+name: bert_cnn
+backbone:
+  _target_: transformers.AutoModel.from_pretrained
+  pretrained_model_name_or_path: distilroberta-base
+  attn_implementation: flash_attention_2
+  hidden_size: 768
+head:
+  _target_: src.models.CNN.CNN
+  input_size: 768
+  num_filters: 64
+  filter_sizes: [1, 2, 3, 4]
+  dropout: 0.5
+  output_dim: 1

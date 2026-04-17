@@ -1,0 +1,6 @@
+#optimizer, learning rate settings for backbones and heads
+
+_target_: torch.optim.AdamW
+bert_lr: 1e-4
+head_lr: 5e-3
+weight_decay: 0.01

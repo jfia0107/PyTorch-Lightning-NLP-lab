@@ -1,0 +1,6 @@
+#settings for MLFlow logger
+
+_target_: lightning.pytorch.loggers.MLFlowLogger
+experiment_name: ${project_name}_${model.name}
+run_name: ${run_name}
+log_model: false

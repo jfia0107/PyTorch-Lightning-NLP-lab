@@ -1,0 +1,21 @@
+# CDL data lane specific settings
+
+_target_: src.data.datamodule.UnifiedDataModule
+source_type: ${source}
+data_path: ${hub_name}
+data_format: null
+text_column: ${text_column}
+label_column: ${label_column}
+pre_split: false
+lane: CDL
+# does the dataset contain binarized labels?
+binary_labels: false
+output_name: ${dataset_name}
+vocab_path: ${hydra:runtime.cwd}/data/${dataset_name}_word2idx.json
+build_vocab: true
+max_vocab_size: 30000
+max_len: 256
+batch_size: 512
+num_workers: 16
+test_size: 0.15
+validation_size: 0.15

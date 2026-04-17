@@ -1,0 +1,11 @@
+# @package _global_
+# Optuna settings, it is incorporated in the codebase as a hydra plugin, standalone version of Optuna also exists
+_target_: hydra_plugins.hydra_optuna_sweeper.optuna_sweeper.OptunaSweeper
+storage: "sqlite:///optuna.db"
+study_name: ${project_name}
+direction: maximize
+n_trials: 93
+n_jobs: 1
+sampler:
+  _target_: optuna.samplers.TPESampler
+  seed: ${seed}

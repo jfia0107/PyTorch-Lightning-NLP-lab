@@ -1,0 +1,16 @@
+# CNN model settings
+
+_target_: src.models.composer.ComposedNLPModel
+name: cnn
+backbone:
+  _target_: src.models.embeddings.create_embedding_backbone
+  vocab_path: ${hydra:runtime.cwd}/data/${dataset_name}_word2idx.json
+  pretrained_file_path: null
+  embedding_dim: 300
+head:
+  _target_: src.models.CNN.CNN
+  input_size: 300
+  num_filters: 64
+  filter_sizes: [1, 2, 3, 4]
+  dropout: 0.5
+  output_dim: 1
